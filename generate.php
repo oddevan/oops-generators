@@ -3,9 +3,9 @@
  * Main file for generators
  *
  * @since 0.1
- * @package oddevan\oops-genertors
+ * @package oddevan\oopsGenerators
  */
 
 namespace oddevan\oopsGenerators;
 
-echo 'Nope!';
+echo 'Ran!';
