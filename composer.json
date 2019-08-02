@@ -1,0 +1,7 @@
+{
+	"name": "oddevan/oops-generators",
+	"description": "A set of scripts to help bootstrap your OOPS-WP work even further",
+	"require": {
+		"webdevstudios/oops-wp": "^0.2.0"
+	}
+}
