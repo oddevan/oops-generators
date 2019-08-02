@@ -19,6 +19,16 @@ class Main {
 			self::help_text();
 			return 0;
 		}
+
+		$type = array_shift( $args );
+
+		switch ( $type ) {
+			case 'cpt':
+				PostType::go( $args );
+				return 0;
+		}
+
+		self::help_text();
 		return 0;
 	}
 
