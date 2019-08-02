@@ -8,8 +8,6 @@
 
 namespace oddevan\oopsGenerators;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 class Main {
 	public static function go( \Composer\Script\Event $event ) : int {
 		$composer_extra = $event->getComposer()->getPackage()->getExtra();
