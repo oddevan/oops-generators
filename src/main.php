@@ -10,21 +10,27 @@ namespace oddevan\oopsGenerators;
 
 class Main {
 	public static function go( \Composer\Script\Event $event ) : int {
-		$args = $event->getArguments();
-
-		print_r( $args );
-		echo "\n\n";
+		$composer_extra = $event->getComposer()->getPackage()->getExtra();
+		$args           = $event->getArguments();
 
 		if ( ! is_array( $args ) || empty( $args ) ) {
 			self::help_text();
 			return 0;
 		}
 
-		$type = array_shift( $args );
+		if ( ! isset( $composer_extra['oopsgen'] ) ||
+			! isset( $composer_extra['oopsgen']['base_namespace'] ) ||
+			! isset( $composer_extra['oopsgen']['base_dir'] ) ) {
+				echo 'Please make sure your `base_namespace` and `base_dir` are set in your composer.json!';
+				return 1;
+		}
+
+		$config = $composer_extra['oopsgen'];
+		$type   = array_shift( $args );
 
 		switch ( $type ) {
 			case 'cpt':
-				PostType::go( $args );
+				PostType::go( $config, $args );
 				return 0;
 		}
 
