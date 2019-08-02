@@ -4,7 +4,9 @@
 	"require": {
 		"webdevstudios/oops-wp": "^0.2.0"
 	},
-	"scripts": {
-		"oops-cpt": "@php generate.php"
+	"autoload": {
+		"psr-4": {
+				"oddevan\\oopsGenerators\\": "src/"
+		}
 	}
 }
