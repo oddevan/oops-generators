@@ -19,11 +19,11 @@ class PostType {
 
 		foreach ( $args as $cptname ) {
 			$class_namespace = $config['base_namespace'] . 'Content\\PostType\\';
-			$class_file      = $config['base_dir'] . 'Content/PostType/' . $cptname . '.php';
+			$class_file      = $config['base_dir'] . 'Content/PostType/' . Inflector::classify( $cptname ) . '.php';
 
 			echo "Generating Custom Post Type {$cptname} at {$class_file}...";
 
-			//\ob_start();
+			\ob_start();
 ?>
  //phpcs:ignore Wordpress.Files.Filename
 /**
@@ -64,7 +64,7 @@ class <?php echo Inflector::classify( $cptname ); ?> extends PostType {
 			'name'                  => _x( '<?php echo Inflector::pluralize( $cptname ); ?>', 'Post Type General Name', 'smolblog' ),
 			'singular_name'         => _x( '<?php echo Inflector::singularize( $cptname ); ?>', 'Post Type Singular Name', 'smolblog' ),
 			'menu_name'             => __( '<?php echo Inflector::pluralize( $cptname ); ?>', 'smolblog' ),
-			'name_admin_bar'        => __( '<?php echo Inflector::singularize( $cptname ); ?>n', 'smolblog' ),
+			'name_admin_bar'        => __( '<?php echo Inflector::singularize( $cptname ); ?>', 'smolblog' ),
 			'archives'              => __( '<?php echo Inflector::singularize( $cptname ); ?> Archives', 'smolblog' ),
 			'attributes'            => __( '<?php echo Inflector::singularize( $cptname ); ?> Attributes', 'smolblog' ),
 			'parent_item_colon'     => __( 'Parent <?php echo Inflector::singularize( $cptname ); ?>:', 'smolblog' ),
@@ -106,7 +106,8 @@ class <?php echo Inflector::classify( $cptname ); ?> extends PostType {
 }
 
 <?php
-			$output = \ob_end_flush();
+			$output = \ob_get_contents();
+			\ob_end_clean();
 			echo '<' . '?php' . $output;
 		}
 
