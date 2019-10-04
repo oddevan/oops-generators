@@ -14,7 +14,31 @@ Add this repo:
 		"type": "vcs",
 		"url": "https://github.com/oddevan/oops-generators"
 	}
-]
+],
+"require": {
+	"oddevan/oops-generators": "dev-master"
+}
+```
+
+Make sure your `composer.json` has the necessary info, especially your `psr-4` autoloader:
+
+```json
+"name": "smolblog/smolblog-wp",
+"description": "Bigger than micro, smaller than medium.",
+"version": "0.1.0",
+"authors": [
+	{
+		"name": "Evan Hildreth",
+		"email": "me@eph.me",
+		"homepage": "http://eph.me",
+		"role": "Developer"
+	}
+],
+"autoload": {
+	"psr-4": {
+		"Smolblog\\WP\\": "plugins/smolblog-wp/src/"
+	}
+}
 ```
 
 Add the configuration:
@@ -22,13 +46,10 @@ Add the configuration:
 ```json
 "extra": {
 	"oopsgen": {
-		"base_namespace": "Smolblog\\WP\\",
-		"base_dir": "plugins/smolblog-wp/src/"
+		"text-domain": "smolblog-wp"
 	}
 }
 ```
-
-(these should correspond to your autoloader)
 
 And add the script handler:
 
