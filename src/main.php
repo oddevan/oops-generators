@@ -10,10 +10,11 @@ namespace oddevan\oopsGenerators;
 
 class Main {
 	public static function go( \Composer\Script\Event $event ) : int {
-		$composer_pkg   = $event->getComposer()->getPackage();
-		$composer_extra = $composer_pkg->getExtra();
+		$composer_pkg      = $event->getComposer()->getPackage();
+		$composer_extra    = $composer_pkg->getExtra();
 		$composer_autoload = $composer_pkg->getAutoload();
-		$args           = $event->getArguments();
+		$composer_authors  = $composer_pkg->getAuthors();
+		$args              = $event->getArguments();
 
 		if ( ! is_array( $args ) || empty( $args ) ) {
 			self::help_text();
@@ -22,18 +23,31 @@ class Main {
 
 		if ( ! isset( $composer_autoload ) ||
 			! isset( $composer_autoload['psr-4'] ) ) {
-				echo "Please make sure your psr-4 autoloader is set in your composer.json!\n";
-				return 1;
+			echo "Please make sure your psr-4 autoloader is set in your composer.json!\n";
+			return 1;
+		}
+
+		if ( ! isset( $composer_extra['oopsgen'] ) ||
+			! isset( $composer_extra['oopsgen']['text-domain'] ) ) {
+			echo "Please make sure your text domain is set in your composer.json!\n";
+			return 1;
 		}
 
 		$config = [
-			'package' => $composer_pkg->getName(),
-			'version' => $composer_pkg->getPrettyVersion() ?? 'dev-master',
+			'package'     => $composer_pkg->getName(),
+			'version'     => $composer_pkg->getPrettyVersion() ?? date( 'YYYY-mm-dd' ),
+			'text_domain' => $composer_extra['oopsgen']['text-domain'],
+			'author'      => false,
 		];
+
 		$config['base_namespace'] = array_keys( $composer_autoload['psr-4'] )[0];
 		$config['base_directory'] = $composer_autoload['psr-4'][ $config['base_namespace'] ];
-		$type   = array_shift( $args );
 
+		if ( is_array( $composer_authors ) ) {
+			$config['author'] = $composer_authors[0]['name'] . ' <' . $composer_authors[0]['email'] . '>';
+		}
+
+		$type = array_shift( $args );
 		switch ( $type ) {
 			case 'cpt':
 				PostType::go( $config, $args );
@@ -72,7 +86,6 @@ Usage: composer oopsgen -- [type] [name]
 Types
 -----
 cpt - Custom Post Type
-tax - Custom Taxonomy
 <?php
 	}
 }
