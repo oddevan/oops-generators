@@ -10,7 +10,8 @@ namespace oddevan\oopsGenerators;
 
 class Main {
 	public static function go( \Composer\Script\Event $event ) : int {
-		$composer_extra = $event->getComposer()->getPackage()->getExtra();
+		$composer_pkg   = $event->getComposer()->getPackage();
+		$composer_extra = $composer_pkg->getExtra();
 		$args           = $event->getArguments();
 
 		if ( ! is_array( $args ) || empty( $args ) ) {
@@ -31,6 +32,16 @@ class Main {
 		switch ( $type ) {
 			case 'cpt':
 				PostType::go( $config, $args );
+				return 0;
+
+			case 'debug':
+				print_r( $composer_pkg->getName() );
+				print_r( $composer_pkg->getTargetDir() );
+				print_r( $composer_pkg->getVersion() );
+				print_r( $composer_pkg->getPrettyVersion() );
+				print_r( $composer_pkg->getAutoload() );
+				print_r( $composer_pkg->getAuthors() );
+				print_r( $composer_pkg->getConfig() );
 				return 0;
 		}
 
