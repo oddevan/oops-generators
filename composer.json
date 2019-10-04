@@ -8,5 +8,8 @@
 		"psr-4": {
 				"oddevan\\oopsGenerators\\": "src/"
 		}
+	},
+	"scripts": {
+			"oopsgen": "oddevan\\oopsGenerators\\Main::go"
 	}
 }

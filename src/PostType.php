@@ -19,7 +19,7 @@ class PostType {
 
 		foreach ( $args as $cptname ) {
 			$class_namespace = $config['base_namespace'] . 'Content\\PostType\\';
-			$class_file      = $config['base_dir'] . 'Content/PostType/' . Inflector::classify( $cptname ) . '.php';
+			$class_file      = $config['base_directory'] . 'Content/PostType/' . Inflector::classify( $cptname ) . '.php';
 
 			echo "Generating Custom Post Type {$cptname} at {$class_file}...";
 
@@ -29,8 +29,8 @@ class PostType {
 /**
  * A general description of your post type
  *
- * @since 0.0.0
- * @package <?php echo $config['base_namespace']; ?>
+ * @since <?php echo $config['version']; ?>
+ * @package <?php echo $config['package']; ?>
  */
 
 namespace <?php echo $class_namespace; ?>;
@@ -40,14 +40,14 @@ use WebDevStudios\OopsWP\Structure\Content\PostType;
 /**
  * A general description of your post type
  *
- * @since 0.0.0
+ * @since <?php echo $config['version']; ?>
  */
 class <?php echo Inflector::classify( $cptname ); ?> extends PostType {
 	/**
 	 * Permalink slug for this post type
 	 *
 	 * @var string $slug Permalink prefix
-	 * @since 0.0.0
+	 * @since <?php echo $config['version']; ?>
 	 */
 	protected $slug = '<?php echo str_replace( '_', '-', Inflector::tableize( $cptname ) ); ?>';
 
@@ -57,7 +57,7 @@ class <?php echo Inflector::classify( $cptname ); ?> extends PostType {
 	 *
 	 * @return Array labels for post type.
 	 * @author me@eph.me
-	 * @since 0.0.0
+	 * @since <?php echo $config['version']; ?>
 	 */
 	protected function get_labels() : array {
 		return [
@@ -97,7 +97,7 @@ class <?php echo Inflector::classify( $cptname ); ?> extends PostType {
 	 *
 	 * @return Array information for post type.
 	 * @author me@eph.me
-	 * @since 0.0.0
+	 * @since <?php echo $config['version']; ?>
 	 */
 	protected function get_args() : array {
 		return [
