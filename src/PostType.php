@@ -47,17 +47,17 @@ class <?php echo Inflector::classify( $cptname ); ?> extends PostType {
 	 * Permalink slug for this post type
 	 *
 	 * @var string $slug Permalink prefix
-	 * @since 0.1.0
+	 * @since 0.0.0
 	 */
 	protected $slug = '<?php echo str_replace( '_', '-', Inflector::tableize( $cptname ) ); ?>';
 
 	/**
 	 * Override the superclass method and provide the labels array
-	 * for registering the Connection post type
+	 * for registering the <?php echo Inflector::classify( $cptname ); ?> post type
 	 *
 	 * @return Array labels for post type.
 	 * @author me@eph.me
-	 * @since 0.1.0
+	 * @since 0.0.0
 	 */
 	protected function get_labels() : array {
 		return [
@@ -93,11 +93,11 @@ class <?php echo Inflector::classify( $cptname ); ?> extends PostType {
 
 	/**
 	 * Override the superclass method and provide the args array
-	 * for registering the Connection post type
+	 * for registering the <?php echo Inflector::classify( $cptname ); ?> post type
 	 *
 	 * @return Array information for post type.
 	 * @author me@eph.me
-	 * @since 0.1.0
+	 * @since 0.0.0
 	 */
 	protected function get_args() : array {
 		return [
